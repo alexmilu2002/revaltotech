@@ -8,6 +8,12 @@ const languageToggle = document.querySelector('#language-toggle');
 const languageList = document.querySelector('#language-list');
 const languageOptions = languageList ? [...languageList.querySelectorAll('li[data-lang]')] : [];
 let currentLanguage = 'en';
+const carousel = document.querySelector('#product-carousel');
+const carouselTrack = document.querySelector('#carousel-track');
+const carouselSlides = carouselTrack ? [...carouselTrack.children] : [];
+const carouselPrev = document.querySelector('#carousel-prev');
+const carouselNext = document.querySelector('#carousel-next');
+const carouselDots = carousel ? [...carousel.querySelectorAll('.carousel-dot')] : [];
 
 const translations = {
   en: {
@@ -34,6 +40,15 @@ const translations = {
     cardThreeTitle: 'Repairs & enterprise',
     cardThreeText: 'When something stops working, we look for the sensible fix and help businesses keep moving. Our team has experience in repairing and refurbishing electronic components.',
     cardThreeLink: 'Talk to our team',
+    inventoryTitle: 'A quick peek<br /><em>at our stock.</em>',
+    inventoryIntro: 'Every module and drive we sell is inspected, tested, and graded before it reaches you. This is not everything we sell, but just a look at what’s currently moving through our warehouse.',
+    inventoryCaptionOne: 'Samsung 32GB DDR4 ECC memory, Cisco-certified',
+    inventoryCaptionTwo: 'Kingston 32GB memory modules, factory sealed',
+    inventoryCaptionThree: 'Micron 32GB DDR4 server memory, NetApp-certified',
+    inventoryCaptionFour: 'Server memory, tested and sorted for resale',
+    inventoryCaptionFive: 'Samsung enterprise SSDs, inspected and graded',
+    inventoryCaptionSix: 'Seagate Exos X18 16TB enterprise hard drive, sealed',
+    inventoryCaptionSeven: 'Samsung SM883 enterprise SSDs, ready to ship',
     whyTitle: 'We believe good<br />tech deserves a <em>future.</em>',
     whyIntro: 'We started Revalto because too much useful technology is discarded too soon. We recover, test, repair, and repurpose hardware so more people can get reliable tech without the unnecessary cost or waste.',
     principleOneTitle: 'We listen first',
@@ -83,6 +98,15 @@ const translations = {
     cardThreeTitle: 'Reparaties & enterprise',
     cardThreeText: 'Wanneer iets niet werkt, zoeken we naar de juiste oplossing zodat uw bedrijf soepel kan blijven draaien. Ons team heeft ervaring met het repareren en refurbishen van elektronische componenten.',
     cardThreeLink: 'Praat met ons team',
+    inventoryTitle: 'Een snelle blik<br /><em>op onze voorraad.</em>',
+    inventoryIntro: 'Elke module en elke drive die we verkopen wordt geïnspecteerd, getest en beoordeeld voordat deze bij u terechtkomt. Dit is niet alles wat we verkopen, maar slechts een kijkje in wat er momenteel door ons magazijn gaat.',
+    inventoryCaptionOne: 'Samsung 32GB DDR4 ECC-geheugen, Cisco-gecertificeerd',
+    inventoryCaptionTwo: 'Kingston 32GB geheugenmodules, fabrieksverzegeld',
+    inventoryCaptionThree: 'Micron 32GB DDR4 servergeheugen, NetApp-gecertificeerd',
+    inventoryCaptionFour: 'Servergeheugen, getest en gesorteerd voor wederverkoop',
+    inventoryCaptionFive: 'Samsung enterprise SSD’s, geïnspecteerd en beoordeeld',
+    inventoryCaptionSix: 'Seagate Exos X18 16TB enterprise harde schijf, verzegeld',
+    inventoryCaptionSeven: 'Samsung SM883 enterprise SSD’s, klaar voor verzending',
     whyTitle: 'We geloven dat goede<br />techniek een <em>toekomst</em> verdient.',
     whyIntro: 'We begonnen met Revalto omdat te veel nuttige technologie te vroeg wordt weggegooid. We herstellen, testen, repareren en hergebruiken hardware zodat meer mensen betrouwbare technologie kunnen gebruiken zonder onnodige kosten of afval.',
     principleOneTitle: 'We luisteren eerst',
@@ -132,6 +156,15 @@ const translations = {
     cardThreeTitle: 'Reparaturen & Enterprise',
     cardThreeText: 'Wenn etwas nicht funktioniert, suchen wir nach der sinnvollsten Lösung und helfen Unternehmen, weiterzuwirken. Unser Team verfügt über Erfahrung in der Reparatur und Aufbereitung von elektronischen Komponenten.',
     cardThreeLink: 'Mit unserem Team sprechen',
+    inventoryTitle: 'Ein kurzer Blick<br /><em>in unseren Bestand.</em>',
+    inventoryIntro: 'Jedes Modul und jedes Laufwerk, das wir verkaufen, wird geprüft, getestet und bewertet, bevor es bei Ihnen ankommt. Das ist nicht alles, was wir verkaufen, sondern nur ein Einblick in das, was gerade durch unser Lager läuft.',
+    inventoryCaptionOne: 'Samsung 32GB DDR4 ECC-Speicher, Cisco-zertifiziert',
+    inventoryCaptionTwo: 'Kingston 32GB Speichermodule, werkseitig versiegelt',
+    inventoryCaptionThree: 'Micron 32GB DDR4 Server-Speicher, NetApp-zertifiziert',
+    inventoryCaptionFour: 'Server-Speicher, getestet und sortiert für den Wiederverkauf',
+    inventoryCaptionFive: 'Samsung Enterprise-SSDs, geprüft und bewertet',
+    inventoryCaptionSix: 'Seagate Exos X18 16TB Enterprise-Festplatte, versiegelt',
+    inventoryCaptionSeven: 'Samsung SM883 Enterprise-SSDs, versandbereit',
     whyTitle: 'Wir glauben, gute<br />Technik verdient eine <em>Zukunft.</em>',
     whyIntro: 'Revalto begann, weil zu viel nützliche Technologie zu schnell entsorgt wird. Wir bergen, testen, reparieren und wiederverwenden Hardware, damit mehr Menschen zuverlässige Technik ohne unnötige Kosten oder Abfall nutzen können.',
     principleOneTitle: 'Wir hören zuerst zu',
@@ -181,6 +214,15 @@ const translations = {
     cardThreeTitle: 'Réparations & entreprise',
     cardThreeText: 'Quand quelque chose ne fonctionne plus, nous cherchons la solution la plus sensée pour aider les entreprises à avancer. Notre équipe a de l’expérience dans la réparation et le reconditionnement de composants électroniques.',
     cardThreeLink: 'Parlez à notre équipe',
+    inventoryTitle: 'Un petit aperçu<br /><em>de notre stock.</em>',
+    inventoryIntro: 'Chaque module et disque que nous vendons est inspecté, testé et évalué avant de vous parvenir. Ceci ne représente pas tout ce que nous vendons, mais seulement un aperçu de ce qui transite actuellement par notre entrepôt.',
+    inventoryCaptionOne: 'Mémoire Samsung 32 Go DDR4 ECC, certifiée Cisco',
+    inventoryCaptionTwo: 'Modules de mémoire Kingston 32 Go, scellés d’usine',
+    inventoryCaptionThree: 'Mémoire serveur Micron 32 Go DDR4, certifiée NetApp',
+    inventoryCaptionFour: 'Mémoire serveur, testée et triée pour la revente',
+    inventoryCaptionFive: 'SSD professionnels Samsung, inspectés et évalués',
+    inventoryCaptionSix: 'Disque dur professionnel Seagate Exos X18 16 To, scellé',
+    inventoryCaptionSeven: 'SSD professionnels Samsung SM883, prêts à expédier',
     whyTitle: 'Nous croyons que la bonne<br />technologie mérite un <em>avenir.</em>',
     whyIntro: 'Nous avons fondé Revalto parce que trop de technologies utiles sont jetées trop tôt. Nous récupérons, testons, réparons et réutilisons le matériel pour que davantage de personnes aient accès à une technologie fiable sans coûts inutiles ni gaspillage.',
     principleOneTitle: 'Nous écoutons d’abord',
@@ -230,6 +272,15 @@ const translations = {
     cardThreeTitle: 'الإصلاحات ومشاريع المؤسسات',
     cardThreeText: 'عندما لا يعمل شيء، نبحث عن الحل الأكثر منطقية لمساعدة الشركات على الاستمرار في الحركة. يتمتع فريقنا بخبرة في إصلاح وتجديد المكونات الإلكترونية.',
     cardThreeLink: 'تحدث إلى فريقنا',
+    inventoryTitle: 'نظرة سريعة<br /><em>على مخزوننا.</em>',
+    inventoryIntro: 'يتم فحص واختبار وتصنيف كل وحدة ذاكرة وقرص نبيعه قبل أن يصل إليك. هذا لا يمثل كل ما نبيعه، بل مجرد نظرة على ما يمر حاليًا عبر مستودعنا.',
+    inventoryCaptionOne: 'ذاكرة Samsung سعة 32 جيجابايت DDR4 ECC، معتمدة من Cisco',
+    inventoryCaptionTwo: 'وحدات ذاكرة Kingston سعة 32 جيجابايت، مختومة من المصنع',
+    inventoryCaptionThree: 'ذاكرة خادم Micron سعة 32 جيجابايت DDR4، معتمدة من NetApp',
+    inventoryCaptionFour: 'ذاكرة خادم، مُختبرة ومُصنّفة لإعادة البيع',
+    inventoryCaptionFive: 'أقراص SSD من Samsung للمؤسسات، مفحوصة ومصنّفة',
+    inventoryCaptionSix: 'قرص صلب Seagate Exos X18 بسعة 16 تيرابايت للمؤسسات، مختوم',
+    inventoryCaptionSeven: 'أقراص SSD من Samsung طراز SM883 للمؤسسات، جاهزة للشحن',
     whyTitle: 'نؤمن أن التكنولوجيا الجيدة<br />تستحق <em>مستقبلًا.</em>',
     whyIntro: 'بدأنا ريفالتو لأن الكثير من التكنولوجيا المفيدة يتم التخلص منها قبل أوانها. نحن نستعيد المعدات ونختبرها ونصلحها ونعيد استخدامها حتى يتمكن المزيد من الناس من الحصول على تكنولوجيا موثوقة دون تكلفة أو هدر غير ضروريين.',
     principleOneTitle: 'نستمع أولاً',
@@ -279,6 +330,15 @@ const translations = {
     cardThreeTitle: '维修与企业服务',
     cardThreeText: '当设备出现故障时,我们会寻找最合理的解决方案,帮助企业保持正常运转。我们的团队在电子元件维修与翻新方面拥有丰富经验。',
     cardThreeLink: '联系我们的团队',
+    inventoryTitle: '快速浏览<br /><em>我们的库存。</em>',
+    inventoryIntro: '我们出售的每一条内存和每一块硬盘,在发货前都经过检测、测试与分级。这并不是我们出售的全部产品,只是目前在我们仓库中流转的一部分。',
+    inventoryCaptionOne: '三星 32GB DDR4 ECC 内存,思科认证',
+    inventoryCaptionTwo: '金士顿 32GB 内存条,原厂密封',
+    inventoryCaptionThree: '美光 32GB DDR4 服务器内存,NetApp 认证',
+    inventoryCaptionFour: '服务器内存,经检测分级,适合转售',
+    inventoryCaptionFive: '三星企业级固态硬盘,经检测分级',
+    inventoryCaptionSix: '希捷 Exos X18 16TB 企业级机械硬盘,原厂密封',
+    inventoryCaptionSeven: '三星 SM883 企业级固态硬盘,可直接发货',
     whyTitle: '我们相信优质<br />科技值得拥有<em>未来。</em>',
     whyIntro: '我们创立 Revalto,是因为太多仍然有用的科技被过早淘汰。我们回收、测试、维修并再利用硬件,让更多人能以更低的成本获得可靠的科技产品,减少不必要的浪费。',
     principleOneTitle: '我们先倾听',
@@ -438,6 +498,104 @@ if (languageToggle && languageList) {
       closeLanguageList();
     }
   });
+}
+
+if (carousel && carouselTrack && carouselSlides.length) {
+  let currentSlide = 0;
+  let autoplayId = null;
+  const AUTOPLAY_MS = 5000;
+
+  const goToSlide = (index) => {
+    currentSlide = (index + carouselSlides.length) % carouselSlides.length;
+    carouselTrack.style.transform = `translateX(-${currentSlide * 100}%)`;
+    carouselDots.forEach((dot, dotIndex) => {
+      dot.setAttribute('aria-selected', String(dotIndex === currentSlide));
+    });
+  };
+
+  const stopAutoplay = () => {
+    if (autoplayId) {
+      clearInterval(autoplayId);
+      autoplayId = null;
+    }
+  };
+
+  const startAutoplay = () => {
+    stopAutoplay();
+    autoplayId = setInterval(() => goToSlide(currentSlide + 1), AUTOPLAY_MS);
+  };
+
+  carouselPrev?.addEventListener('click', () => {
+    goToSlide(currentSlide - 1);
+    startAutoplay();
+  });
+
+  carouselNext?.addEventListener('click', () => {
+    goToSlide(currentSlide + 1);
+    startAutoplay();
+  });
+
+  carouselDots.forEach((dot, index) => {
+    dot.addEventListener('click', () => {
+      goToSlide(index);
+      startAutoplay();
+    });
+  });
+
+  carousel.addEventListener('keydown', (event) => {
+    if (event.key === 'ArrowLeft') {
+      goToSlide(currentSlide - 1);
+      startAutoplay();
+    } else if (event.key === 'ArrowRight') {
+      goToSlide(currentSlide + 1);
+      startAutoplay();
+    }
+  });
+
+  carousel.addEventListener('mouseenter', stopAutoplay);
+  carousel.addEventListener('mouseleave', startAutoplay);
+  carousel.addEventListener('focusin', stopAutoplay);
+  carousel.addEventListener('focusout', startAutoplay);
+
+  let dragStartX = 0;
+  let dragDeltaX = 0;
+  let isDragging = false;
+
+  carouselTrack.addEventListener('pointerdown', (event) => {
+    isDragging = true;
+    dragStartX = event.clientX;
+    dragDeltaX = 0;
+    stopAutoplay();
+    carouselTrack.style.transition = 'none';
+    carouselTrack.setPointerCapture(event.pointerId);
+  });
+
+  carouselTrack.addEventListener('pointermove', (event) => {
+    if (!isDragging) return;
+    dragDeltaX = event.clientX - dragStartX;
+    const percent = (dragDeltaX / carouselTrack.clientWidth) * 100;
+    carouselTrack.style.transform = `translateX(${-currentSlide * 100 + percent}%)`;
+  });
+
+  const endDrag = () => {
+    if (!isDragging) return;
+    isDragging = false;
+    carouselTrack.style.transition = '';
+    const threshold = carouselTrack.clientWidth * 0.15;
+    if (Math.abs(dragDeltaX) > threshold) {
+      goToSlide(currentSlide + (dragDeltaX < 0 ? 1 : -1));
+    } else {
+      goToSlide(currentSlide);
+    }
+    dragDeltaX = 0;
+    startAutoplay();
+  };
+
+  carouselTrack.addEventListener('pointerup', endDrag);
+  carouselTrack.addEventListener('pointercancel', endDrag);
+
+  goToSlide(0);
+  startAutoplay();
 }
 
 const savedLanguage = localStorage.getItem('revalto-language') || 'en';
