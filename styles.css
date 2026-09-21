@@ -422,6 +422,10 @@ body[dir="rtl"] .language-list {
   padding: 130px 0;
 }
 
+#products {
+  border-top: 1px solid var(--line);
+}
+
 #inventory {
   padding-top: 95px;
   padding-bottom: 95px;
