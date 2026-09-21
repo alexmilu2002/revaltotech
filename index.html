@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Revalto Tech supplies refurbished hardware, professional repairs, and business-grade IT components for consumers and companies." />
   <title>Revalto Tech | Refurbished hardware, ready for more</title>
+  <link rel="icon" type="image/png" href="images/revaltotech-favicon.png" />
+  <link rel="apple-touch-icon" href="images/revaltotech-favicon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -13,25 +15,29 @@
 <body>
   <header class="site-header">
     <a class="brand" href="#top" aria-label="Revalto Tech home">
-      <span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span>
-      <span>revalto<span class="brand-accent">.</span>tech</span>
+      <img class="brand-logo brand-logo-full" src="images/revaltotech-wordmark-lang.png" alt="Revalto Tech" />
+      <img class="brand-logo brand-logo-short" src="images/revaltotech-wordmark-kort.png" alt="Revalto Tech" />
     </a>
     <nav class="main-nav" id="main-nav" aria-label="Main navigation">
       <a href="#products" data-i18n="navProducts">Products</a>
       <a href="#why-revalto" data-i18n="navWhy">Why us</a>
       <a href="#contact" data-i18n="navContact">Contact</a>
       <a class="button button-small button-dark nav-cta" href="#contact" data-i18n="quoteButton">Request a quote</a>
+      <div class="language-switcher" id="language-switcher">
+        <button type="button" class="language-toggle" id="language-toggle" aria-haspopup="listbox" aria-expanded="false" aria-controls="language-list" aria-label="Choose website language">
+          <img class="flag-icon" src="images/flags/gb.svg" alt="" />
+          <span class="language-code">EN</span>
+        </button>
+        <ul class="language-list" id="language-list" role="listbox" aria-label="Choose website language" hidden>
+          <li role="option" data-lang="en" data-flag="images/flags/gb.svg" aria-selected="true" tabindex="-1"><img class="flag-icon" src="images/flags/gb.svg" alt="" /><span>EN</span></li>
+          <li role="option" data-lang="nl" data-flag="images/flags/nl.svg" aria-selected="false" tabindex="-1"><img class="flag-icon" src="images/flags/nl.svg" alt="" /><span>NL</span></li>
+          <li role="option" data-lang="de" data-flag="images/flags/de.svg" aria-selected="false" tabindex="-1"><img class="flag-icon" src="images/flags/de.svg" alt="" /><span>DE</span></li>
+          <li role="option" data-lang="fr" data-flag="images/flags/fr.svg" aria-selected="false" tabindex="-1"><img class="flag-icon" src="images/flags/fr.svg" alt="" /><span>FR</span></li>
+          <li role="option" data-lang="ar" data-flag="images/flags/sa.svg" aria-selected="false" tabindex="-1"><img class="flag-icon" src="images/flags/sa.svg" alt="" /><span>AR</span></li>
+          <li role="option" data-lang="zh" data-flag="images/flags/cn.svg" aria-selected="false" tabindex="-1"><img class="flag-icon" src="images/flags/cn.svg" alt="" /><span>ZH</span></li>
+        </ul>
+      </div>
     </nav>
-    <div class="language-switcher" aria-label="Language selector">
-      <label class="sr-only" for="language-select">Select language</label>
-      <select id="language-select" aria-label="Choose website language">
-        <option value="en">EN</option>
-        <option value="nl">NL</option>
-        <option value="de">DE</option>
-        <option value="fr">FR</option>
-        <option value="ar">AR</option>
-      </select>
-    </div>
     <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav">
       <span></span><span></span><span></span>
     </button>
@@ -62,6 +68,25 @@
         <article class="product-card product-card-dark component-card reveal reveal-delay"><div class="card-index">02</div><img class="product-photo" src="images/SSDenHDD.webp" alt="Hands inspecting an SSD and hard drive beside a laptop" /><h3 data-i18n="cardTwoTitle">Components</h3><p data-i18n="cardTwoText">Need an SSD, memory, server drive, or accessory? We work with trusted brands like Samsung, Micron, Kingston, and SK hynix to help you find the right part, not just any part.</p><a href="#contact" class="card-link" data-i18n="cardTwoLink">Talk components</a></article>
         <article class="product-card product-card-photo reveal reveal-delay-2"><div class="card-index">03</div><img class=" product-photo" src="images/pcrepairs.webp" alt="Technician repairing a desktop computer motherboard" /><h3 data-i18n="cardThreeTitle">Repairs & enterprise</h3><p data-i18n="cardThreeText">When something stops working, we look for the sensible fix and help businesses keep moving. Our team has experience in repairing and refurbishing electronic components.</p><a href="#contact" class="card-link" data-i18n="cardThreeLink">Talk to our team</a></article>
       </div>
+      <p class="brands-label reveal" data-i18n="brandsLabel">Brands we work with</p>
+      <div class="logo-marquee reveal">
+        <div class="logo-track">
+          <img class="logo-item" src="images/cisco-logo.png" alt="Cisco" />
+          <img class="logo-item" src="images/dell-logo.png" alt="Dell" />
+          <img class="logo-item" src="images/hp-logo.png" alt="HP" />
+          <img class="logo-item" src="images/samsung-logo.png" alt="Samsung" />
+          <img class="logo-item" src="images/micron-logo.png" alt="Micron" />
+          <img class="logo-item" src="images/kingston-logo.png" alt="Kingston" />
+          <img class="logo-item" src="images/skhynix-logo.png" alt="SK hynix" />
+          <img class="logo-item" src="images/cisco-logo.png" alt="" aria-hidden="true" />
+          <img class="logo-item" src="images/dell-logo.png" alt="" aria-hidden="true" />
+          <img class="logo-item" src="images/hp-logo.png" alt="" aria-hidden="true" />
+          <img class="logo-item" src="images/samsung-logo.png" alt="" aria-hidden="true" />
+          <img class="logo-item" src="images/micron-logo.png" alt="" aria-hidden="true" />
+          <img class="logo-item" src="images/kingston-logo.png" alt="" aria-hidden="true" />
+          <img class="logo-item" src="images/skhynix-logo.png" alt="" aria-hidden="true" />
+        </div>
+      </div>
     </section>
 
     <section class="split-section section-shell" id="why-revalto">
@@ -91,7 +116,7 @@
     </section>
   </main>
 
-  <footer class="site-footer section-shell"><a class="brand" href="#top"><span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span><span>revalto<span class="brand-accent">.</span>tech</span></a><p data-i18n="footerText">Refurbished hardware for a more sustainable cycle.</p><span class="footer-code">RVLT / 2026</span></footer>
+  <footer class="site-footer section-shell"><a class="brand" href="#top"><img class="brand-logo brand-logo-full" src="images/revaltotech-wordmark-lang.png" alt="Revalto Tech" /><img class="brand-logo brand-logo-short" src="images/revaltotech-wordmark-kort.png" alt="Revalto Tech" /></a><p data-i18n="footerText">Refurbished hardware for a more sustainable cycle.</p><span class="footer-code">RT / 2026</span></footer>
   <script src="script.js"></script>
 </body>
 </html>

@@ -3,7 +3,11 @@ const formNote = document.querySelector('#form-note');
 const siteHeader = document.querySelector('.site-header');
 const menuToggle = document.querySelector('.menu-toggle');
 const mainNav = document.querySelector('#main-nav');
-const languageSelect = document.querySelector('#language-select');
+const languageSwitcher = document.querySelector('#language-switcher');
+const languageToggle = document.querySelector('#language-toggle');
+const languageList = document.querySelector('#language-list');
+const languageOptions = languageList ? [...languageList.querySelectorAll('li[data-lang]')] : [];
+let currentLanguage = 'en';
 
 const translations = {
   en: {
@@ -26,6 +30,7 @@ const translations = {
     cardTwoTitle: 'Components',
     cardTwoText: 'Need an SSD, memory, server drive, or accessory? We work with trusted brands like Samsung, Micron, Kingston, and SK hynix to help you find the right part, not just any part.',
     cardTwoLink: 'Talk components',
+    brandsLabel: 'Brands we work with',
     cardThreeTitle: 'Repairs & enterprise',
     cardThreeText: 'When something stops working, we look for the sensible fix and help businesses keep moving. Our team has experience in repairing and refurbishing electronic components.',
     cardThreeLink: 'Talk to our team',
@@ -74,6 +79,7 @@ const translations = {
     cardTwoTitle: 'Componenten',
     cardTwoText: 'Heeft u een SSD, geheugen, serverdrive of accessoire nodig? We werken met vertrouwde merken zoals Samsung, Micron, Kingston en SK hynix om u het juiste onderdeel te laten vinden, niet alleen het dichtstbijzijnde.',
     cardTwoLink: 'Praat over componenten',
+    brandsLabel: 'Merken waarmee we werken',
     cardThreeTitle: 'Reparaties & enterprise',
     cardThreeText: 'Wanneer iets niet werkt, zoeken we naar de juiste oplossing zodat uw bedrijf soepel kan blijven draaien. Ons team heeft ervaring met het repareren en refurbishen van elektronische componenten.',
     cardThreeLink: 'Praat met ons team',
@@ -122,6 +128,7 @@ const translations = {
     cardTwoTitle: 'Komponenten',
     cardTwoText: 'Benötigen Sie eine SSD, Speicher, Server-Drive oder Zubehör? Wir arbeiten mit vertrauenswürdigen Marken wie Samsung, Micron, Kingston und SK hynix, um Ihnen das passende Teil zu finden, nicht nur irgendeines.',
     cardTwoLink: 'Komponenten besprechen',
+    brandsLabel: 'Marken, mit denen wir arbeiten',
     cardThreeTitle: 'Reparaturen & Enterprise',
     cardThreeText: 'Wenn etwas nicht funktioniert, suchen wir nach der sinnvollsten Lösung und helfen Unternehmen, weiterzuwirken. Unser Team verfügt über Erfahrung in der Reparatur und Aufbereitung von elektronischen Komponenten.',
     cardThreeLink: 'Mit unserem Team sprechen',
@@ -170,6 +177,7 @@ const translations = {
     cardTwoTitle: 'Composants',
     cardTwoText: 'Vous avez besoin d’un SSD, de mémoire, d’un disque serveur ou d’un accessoire ? Nous travaillons avec des marques de confiance comme Samsung, Micron, Kingston et SK hynix pour vous aider à trouver la bonne pièce, pas juste n’importe laquelle.',
     cardTwoLink: 'Parlons composants',
+    brandsLabel: 'Marques avec lesquelles nous travaillons',
     cardThreeTitle: 'Réparations & entreprise',
     cardThreeText: 'Quand quelque chose ne fonctionne plus, nous cherchons la solution la plus sensée pour aider les entreprises à avancer. Notre équipe a de l’expérience dans la réparation et le reconditionnement de composants électroniques.',
     cardThreeLink: 'Parlez à notre équipe',
@@ -218,6 +226,7 @@ const translations = {
     cardTwoTitle: 'المكونات',
     cardTwoText: 'هل تحتاج إلى SSD أو ذاكرة أو قرص خادم أو ملحق؟ نعمل مع علامات تجارية موثوقة مثل Samsung وMicron وKingston وSK hynix لمساعدتك في العثور على القطعة المناسبة، وليس أي قطعة.',
     cardTwoLink: 'تحدث عن المكونات',
+    brandsLabel: 'العلامات التجارية التي نتعامل معها',
     cardThreeTitle: 'الإصلاحات ومشاريع المؤسسات',
     cardThreeText: 'عندما لا يعمل شيء، نبحث عن الحل الأكثر منطقية لمساعدة الشركات على الاستمرار في الحركة. يتمتع فريقنا بخبرة في إصلاح وتجديد المكونات الإلكترونية.',
     cardThreeLink: 'تحدث إلى فريقنا',
@@ -245,6 +254,55 @@ const translations = {
     emailPlaceholder: 'sara@company.com',
     requirementPlaceholder: 'مثل: محولات للشبكة لمكتب صغير أو استبدال قرص خادم',
     formSubmitted: 'شكرًا لك، {name}. طلبك جاهز لفريق ريفالتو.'
+  },
+  zh: {
+    navProducts: '产品',
+    navWhy: '为什么选择我们',
+    navContact: '联系我们',
+    quoteButton: '获取报价',
+    heroTitle: '让科技,<br /><em>焕发新生。</em>',
+    heroSubtitle: '从网络设备、服务器到专业维修与商用级组件,Revalto Tech 凭借丰富的实践经验,与行业内值得信赖的品牌合作。',
+    findSolution: '寻找解决方案',
+    exploreHardware: '探索我们的硬件',
+    visualLabel: '硬件 / 001',
+    visualReady: '已测试 / 可交付',
+    visualHistory: '有故事的硬件',
+    productsTitle: '适合你的<br /><em>科技世界。</em>',
+    productsIntro: '无论您需要可靠的网络硬件、服务器更新,还是整套基础设施所需的组件,我们都会花时间了解最适合您的方案,并在网络与存储领域积累了值得信赖品牌的丰富经验。',
+    cardOneTitle: '网络设备',
+    cardOneText: '我们帮助您采购可靠的交换机、路由器及网络硬件,包括思科(Cisco)、戴尔(Dell)和惠普(HP)等品牌,让您的基础设施保持稳定、安全,并具备扩展能力。',
+    cardOneLink: '咨询网络需求',
+    cardTwoTitle: '组件',
+    cardTwoText: '需要固态硬盘、内存、服务器硬盘或配件?我们与三星(Samsung)、美光(Micron)、金士顿(Kingston)和 SK 海力士(SK hynix)等值得信赖的品牌合作,帮您找到真正合适的配件。',
+    cardTwoLink: '咨询组件',
+    brandsLabel: '合作品牌',
+    cardThreeTitle: '维修与企业服务',
+    cardThreeText: '当设备出现故障时,我们会寻找最合理的解决方案,帮助企业保持正常运转。我们的团队在电子元件维修与翻新方面拥有丰富经验。',
+    cardThreeLink: '联系我们的团队',
+    whyTitle: '我们相信优质<br />科技值得拥有<em>未来。</em>',
+    whyIntro: '我们创立 Revalto,是因为太多仍然有用的科技被过早淘汰。我们回收、测试、维修并再利用硬件,让更多人能以更低的成本获得可靠的科技产品,减少不必要的浪费。',
+    principleOneTitle: '我们先倾听',
+    principleOneText: '我们不会给您千篇一律的答案。我们会先了解您的实际需求,再给出合理的建议。',
+    principleTwoTitle: '我们注重实用',
+    principleTwoText: '我们的工作是让优质科技更容易获得、更易维护,也更符合您的预算。',
+    principleThreeTitle: '我们关注后续影响',
+    principleThreeText: '每一次维修与再利用,都是让设备继续发挥价值、减轻地球负担的机会。',
+    impactTitle: '这个世界的<br /><em>科技已经足够多。</em>',
+    impactIntro: '全球每年产生超过 5000 万吨电子垃圾,其中只有不到 20% 得到妥善回收。Revalto Tech 的使命,就是改变这一现状。',
+    impactStatOne: '吨电子垃圾<br />每年产生',
+    impactStatTwo: '得到妥善回收<br />全球范围内',
+    contactTitle: '让您的<br />科技焕发<em>第二次生命。</em>',
+    contactIntro: '告诉我们您的需求、现有设备,或想要维修的物品,我们将帮助您找到最实际可行的下一步。',
+    contactHours: '周一至周五 / 09:00–17:00',
+    labelName: '您的姓名 <span>*</span>',
+    labelEmail: '工作邮箱 <span>*</span>',
+    labelRequirement: '我们可以如何帮助您? <span>*</span>',
+    sendInquiry: '发送咨询',
+    footerText: '翻新硬件,成就更可持续的循环。',
+    namePlaceholder: '张伟',
+    emailPlaceholder: 'zhang@company.com',
+    requirementPlaceholder: '例如:小型办公室所需的网络交换机,或服务器硬盘更换',
+    formSubmitted: '谢谢您,{name}。您的咨询已提交至 Revalto 团队。'
   }
 };
 
@@ -284,8 +342,17 @@ const setLanguage = (lang) => {
   }
 
   localStorage.setItem('revalto-language', selectedLanguage);
-  if (languageSelect) {
-    languageSelect.value = selectedLanguage;
+  currentLanguage = selectedLanguage;
+
+  if (languageToggle) {
+    const activeOption = languageOptions.find((option) => option.dataset.lang === selectedLanguage);
+    if (activeOption) {
+      languageToggle.querySelector('.flag-icon').src = activeOption.dataset.flag;
+      languageToggle.querySelector('.language-code').textContent = selectedLanguage.toUpperCase();
+    }
+    languageOptions.forEach((option) => {
+      option.setAttribute('aria-selected', String(option.dataset.lang === selectedLanguage));
+    });
   }
 };
 
@@ -311,17 +378,65 @@ if (quoteForm) {
   quoteForm.addEventListener('submit', (event) => {
     event.preventDefault();
     const name = new FormData(quoteForm).get('name') || 'there';
-    const language = languageSelect?.value || 'en';
-    const text = translations[language]?.formSubmitted?.replace('{name}', name);
+    const text = translations[currentLanguage]?.formSubmitted?.replace('{name}', name);
     formNote.textContent = text || `Thanks, ${name}. Your inquiry is ready for the Revalto team.`;
     quoteForm.reset();
   });
 }
 
-if (languageSelect) {
-  languageSelect.addEventListener('change', (event) => {
-    const selectedLanguage = event.target.value;
-    setLanguage(selectedLanguage);
+const closeLanguageList = () => {
+  if (!languageList || languageList.hidden) return;
+  languageList.hidden = true;
+  languageToggle.setAttribute('aria-expanded', 'false');
+};
+
+const openLanguageList = () => {
+  if (!languageList || !languageList.hidden) return;
+  languageList.hidden = false;
+  languageToggle.setAttribute('aria-expanded', 'true');
+  const activeOption = languageOptions.find((option) => option.getAttribute('aria-selected') === 'true');
+  (activeOption || languageOptions[0])?.focus();
+};
+
+if (languageToggle && languageList) {
+  languageToggle.addEventListener('click', () => {
+    if (languageList.hidden) {
+      openLanguageList();
+    } else {
+      closeLanguageList();
+    }
+  });
+
+  languageOptions.forEach((option, index) => {
+    option.addEventListener('click', () => {
+      setLanguage(option.dataset.lang);
+      closeLanguageList();
+      languageToggle.focus();
+    });
+
+    option.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        setLanguage(option.dataset.lang);
+        closeLanguageList();
+        languageToggle.focus();
+      } else if (event.key === 'ArrowDown') {
+        event.preventDefault();
+        languageOptions[(index + 1) % languageOptions.length]?.focus();
+      } else if (event.key === 'ArrowUp') {
+        event.preventDefault();
+        languageOptions[(index - 1 + languageOptions.length) % languageOptions.length]?.focus();
+      } else if (event.key === 'Escape') {
+        closeLanguageList();
+        languageToggle.focus();
+      }
+    });
+  });
+
+  document.addEventListener('click', (event) => {
+    if (!languageSwitcher.contains(event.target)) {
+      closeLanguageList();
+    }
   });
 }
 
