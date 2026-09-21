@@ -18,6 +18,7 @@ const carouselDots = carousel ? [...carousel.querySelectorAll('.carousel-dot')] 
 const translations = {
   en: {
     navProducts: 'Products',
+    navInventory: 'Inventory',
     navWhy: 'Why us',
     navContact: 'Contact',
     quoteButton: 'Request a quote',
@@ -77,6 +78,7 @@ const translations = {
   },
   nl: {
     navProducts: 'Producten',
+    navInventory: 'Voorraad',
     navWhy: 'Waarom ons',
     navContact: 'Contact',
     quoteButton: 'Vraag offerte aan',
@@ -136,6 +138,7 @@ const translations = {
   },
   de: {
     navProducts: 'Produkte',
+    navInventory: 'Lagerbestand',
     navWhy: 'Warum wir',
     navContact: 'Kontakt',
     quoteButton: 'Angebot anfragen',
@@ -195,6 +198,7 @@ const translations = {
   },
   fr: {
     navProducts: 'Produits',
+    navInventory: 'Inventaire',
     navWhy: 'Pourquoi nous',
     navContact: 'Contact',
     quoteButton: 'Demander un devis',
@@ -254,6 +258,7 @@ const translations = {
   },
   ar: {
     navProducts: 'المنتجات',
+    navInventory: 'المخزون',
     navWhy: 'لماذا نحن',
     navContact: 'تواصل',
     quoteButton: 'اطلب عرض سعر',
@@ -313,6 +318,7 @@ const translations = {
   },
   zh: {
     navProducts: '产品',
+    navInventory: '库存',
     navWhy: '为什么选择我们',
     navContact: '联系我们',
     quoteButton: '获取报价',
