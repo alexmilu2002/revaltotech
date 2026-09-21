@@ -521,17 +521,37 @@ body[dir="rtl"] .language-list {
 }
 
 .logo-marquee {
+  position: relative;
   direction: ltr;
   overflow: hidden;
-  mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
-  -webkit-mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
+}
+
+.logo-marquee::before,
+.logo-marquee::after {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 1;
+  width: 56px;
+  content: '';
+  pointer-events: none;
+}
+
+.logo-marquee::before {
+  left: 0;
+  background: linear-gradient(to right, var(--paper), transparent);
+}
+
+.logo-marquee::after {
+  right: 0;
+  background: linear-gradient(to left, var(--paper), transparent);
 }
 
 .logo-track {
   display: flex;
   align-items: center;
   width: max-content;
-  animation: marquee 36s linear infinite;
+  animation: marquee 24s linear infinite;
 }
 
 .logo-item {
@@ -994,6 +1014,15 @@ body[dir="rtl"] .language-list {
 
   .logo-item {
     height: 58px;
+  }
+
+  .logo-marquee::before,
+  .logo-marquee::after {
+    width: 32px;
+  }
+
+  .logo-track {
+    animation-duration: 16s;
   }
 
   .visual-caption {
