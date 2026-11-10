@@ -74,7 +74,8 @@ const translations = {
     namePlaceholder: 'Jane Smith',
     emailPlaceholder: 'jane@company.com',
     requirementPlaceholder: 'e.g. network switches for a small office, or a server drive replacement',
-    formSubmitted: 'Thanks, {name}. Your inquiry is ready for the Revalto team.'
+    formSubmitted: 'Thanks, {name}. Your inquiry is ready for the Revalto team.',
+    formError: 'Sorry, something went wrong. Please email us at nayel@revaltotech.nl.'
   },
   nl: {
     navProducts: 'Producten',
@@ -134,7 +135,8 @@ const translations = {
     namePlaceholder: 'Jan Jansen',
     emailPlaceholder: 'jan@bedrijf.nl',
     requirementPlaceholder: 'bijv. netwerk switches voor een klein kantoor, of een serverdrive vervanging',
-    formSubmitted: 'Bedankt, {name}. Uw aanvraag staat klaar voor het Revalto-team.'
+    formSubmitted: 'Bedankt, {name}. Uw aanvraag staat klaar voor het Revalto-team.',
+    formError: 'Sorry, er ging iets mis. Mail ons via nayel@revaltotech.nl.'
   },
   de: {
     navProducts: 'Produkte',
@@ -194,7 +196,8 @@ const translations = {
     namePlaceholder: 'Max Mustermann',
     emailPlaceholder: 'max@unternehmen.de',
     requirementPlaceholder: 'z. B. Netzwerk-Switches für ein kleines Büro oder ein Server-Drive Ersatz',
-    formSubmitted: 'Danke, {name}. Ihre Anfrage ist für das Revalto-Team bereit.'
+    formSubmitted: 'Danke, {name}. Ihre Anfrage ist für das Revalto-Team bereit.',
+    formError: 'Entschuldigung, etwas ist schiefgelaufen. Bitte schreiben Sie an nayel@revaltotech.nl.'
   },
   fr: {
     navProducts: 'Produits',
@@ -254,7 +257,8 @@ const translations = {
     namePlaceholder: 'Marie Martin',
     emailPlaceholder: 'marie@entreprise.fr',
     requirementPlaceholder: 'par ex. switchs réseau pour un petit bureau ou un remplacement de disque serveur',
-    formSubmitted: 'Merci, {name}. Votre demande est prête pour l’équipe Revalto.'
+    formSubmitted: 'Merci, {name}. Votre demande est prête pour l’équipe Revalto.',
+    formError: 'Désolé, une erreur s’est produite. Écrivez-nous à nayel@revaltotech.nl.'
   },
   ar: {
     navProducts: 'المنتجات',
@@ -314,7 +318,8 @@ const translations = {
     namePlaceholder: 'سارة أحمد',
     emailPlaceholder: 'sara@company.com',
     requirementPlaceholder: 'مثل: محولات للشبكة لمكتب صغير أو استبدال قرص خادم',
-    formSubmitted: 'شكرًا لك، {name}. طلبك جاهز لفريق ريفالتو.'
+    formSubmitted: 'شكرًا لك، {name}. طلبك جاهز لفريق ريفالتو.',
+    formError: 'عذرًا، حدث خطأ ما. يرجى مراسلتنا على nayel@revaltotech.nl.'
   },
   zh: {
     navProducts: '产品',
@@ -374,7 +379,8 @@ const translations = {
     namePlaceholder: '张伟',
     emailPlaceholder: 'zhang@company.com',
     requirementPlaceholder: '例如:小型办公室所需的网络交换机,或服务器硬盘更换',
-    formSubmitted: '谢谢您,{name}。您的咨询已提交至 Revalto 团队。'
+    formSubmitted: '谢谢您,{name}。您的咨询已提交至 Revalto 团队。',
+    formError: '抱歉,出现了问题。请发送邮件至 nayel@revaltotech.nl。'
   }
 };
 
@@ -447,12 +453,33 @@ if (mainNav) {
 }
 
 if (quoteForm) {
-  quoteForm.addEventListener('submit', (event) => {
+  quoteForm.addEventListener('submit', async (event) => {
     event.preventDefault();
-    const name = new FormData(quoteForm).get('name') || 'there';
-    const text = translations[currentLanguage]?.formSubmitted?.replace('{name}', name);
-    formNote.textContent = text || `Thanks, ${name}. Your inquiry is ready for the Revalto team.`;
-    quoteForm.reset();
+    const formData = new FormData(quoteForm);
+    const name = formData.get('name') || 'there';
+    const submitButton = quoteForm.querySelector('button[type="submit"]');
+    formData.append('_subject', `New inquiry from ${name} via revaltotech.nl`);
+    formData.append('_template', 'table');
+    formData.append('_captcha', 'false');
+    submitButton.disabled = true;
+    formNote.textContent = '';
+
+    try {
+      const response = await fetch('https://formsubmit.co/ajax/nayel@revaltotech.nl', {
+        method: 'POST',
+        headers: { Accept: 'application/json' },
+        body: formData
+      });
+      const result = await response.json().catch(() => ({}));
+      if (!response.ok || result.success === false || result.success === 'false') throw new Error(result.message || 'Send failed');
+      const text = translations[currentLanguage]?.formSubmitted?.replace('{name}', name);
+      formNote.textContent = text || `Thanks, ${name}. Your inquiry is ready for the Revalto team.`;
+      quoteForm.reset();
+    } catch (error) {
+      formNote.textContent = translations[currentLanguage]?.formError || 'Sorry, something went wrong. Please email us at nayel@revaltotech.nl.';
+    } finally {
+      submitButton.disabled = false;
+    }
   });
 }
 
