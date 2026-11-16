@@ -953,6 +953,7 @@ body[dir="rtl"] .card-arrow {
 .quote-form {
   display: flex;
   flex-direction: column;
+  align-self: center;
 }
 
 .quote-form label {
