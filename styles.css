@@ -954,6 +954,7 @@ body[dir="rtl"] .card-arrow {
   display: flex;
   flex-direction: column;
   align-self: center;
+  margin-top: 90px;
 }
 
 .quote-form label {
@@ -1145,6 +1146,10 @@ body[dir="rtl"] .card-arrow {
   .impact-section,
   .contact-section {
     grid-template-columns: 1fr;
+  }
+
+  .quote-form {
+    margin-top: 0;
   }
 
   #inventory {
